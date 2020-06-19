@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>华仔的blog</title>
+  
+  <subtitle>码农的技术之路</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2020-06-19T13:44:12.542Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>风清扬</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>名人介绍</title>
+    <link href="http://yoursite.com/2020/06/19/%E5%90%8D%E4%BA%BA%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://yoursite.com/2020/06/19/%E5%90%8D%E4%BA%BA%E4%BB%8B%E7%BB%8D/</id>
+    <published>2020-06-19T13:42:45.000Z</published>
+    <updated>2020-06-19T13:44:12.542Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;郭存华(1912—1991)，昔阳县孔氏乡北泉村人。1939年参加工作，1941年加入中国共产党，历任昔阳县二区武委会主任，县武委会参谋组长。1945年任太谷县武委会参谋组长，太谷县六区区委书记。1948年任中共太谷县委组织部长、县委书记。1954年任中共榆次县委书记。19
+        
+      
+    
+    </summary>
+    
+    
+      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="山西" scheme="http://yoursite.com/tags/%E5%B1%B1%E8%A5%BF/"/>
+    
+      <category term="家乡" scheme="http://yoursite.com/tags/%E5%AE%B6%E4%B9%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>北泉村</title>
+    <link href="http://yoursite.com/2020/06/19/%E5%8C%97%E6%B3%89%E6%9D%91/"/>
+    <id>http://yoursite.com/2020/06/19/%E5%8C%97%E6%B3%89%E6%9D%91/</id>
+    <published>2020-06-19T13:40:04.000Z</published>
+    <updated>2020-06-19T13:45:26.895Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3
+        
+      
+    
+    </summary>
+    
+    
+      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="山西" scheme="http://yoursite.com/tags/%E5%B1%B1%E8%A5%BF/"/>
+    
+      <category term="家乡" scheme="http://yoursite.com/tags/%E5%AE%B6%E4%B9%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>山西介绍</title>
+    <link href="http://yoursite.com/2020/06/19/%E5%B1%B1%E8%A5%BF%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://yoursite.com/2020/06/19/%E5%B1%B1%E8%A5%BF%E4%BB%8B%E7%BB%8D/</id>
+    <published>2020-06-19T13:34:47.000Z</published>
+    <updated>2020-06-19T13:38:32.679Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;strong&gt;都说：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;十年中国看深圳，&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;百年中国看上海，&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;千年中国看北京，&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;三千
+        
+      
+    
+    </summary>
+    
+    
+      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="山西" scheme="http://yoursite.com/tags/%E5%B1%B1%E8%A5%BF/"/>
+    
+      <category term="旅游" scheme="http://yoursite.com/tags/%E6%97%85%E6%B8%B8/"/>
+    
+  </entry>
+  
+</feed>
