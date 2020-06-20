@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-06-20T15:55:53.949Z</updated>
+  <updated>2020-06-20T17:32:11.946Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>flink 维表关联</title>
+    <link href="http://yoursite.com/2020/06/21/flink-%E7%BB%B4%E8%A1%A8%E5%85%B3%E8%81%94/"/>
+    <id>http://yoursite.com/2020/06/21/flink-%E7%BB%B4%E8%A1%A8%E5%85%B3%E8%81%94/</id>
+    <published>2020-06-20T16:56:58.000Z</published>
+    <updated>2020-06-20T17:32:11.946Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h4 id=&quot;实时查询维表&quot;&gt;&lt;a href=&quot;#实时查询维表&quot; class=&quot;headerlink&quot; title=&quot;实时查询维表&quot;&gt;&lt;/a&gt;实时查询维表&lt;/h4&gt;&lt;p&gt;同步实时数据库查找关联是最为简单的关联方式，只需要在一个 Map 或者 FlatMap
+        
+      
+    
+    </summary>
+    
+    
+      <category term="flink" scheme="http://yoursite.com/categories/flink/"/>
+    
+    
+      <category term="flink" scheme="http://yoursite.com/tags/flink/"/>
+    
+      <category term="维表关联" scheme="http://yoursite.com/tags/%E7%BB%B4%E8%A1%A8%E5%85%B3%E8%81%94/"/>
+    
+  </entry>
   
   <entry>
     <title>spark checkpoint cache区别</title>
