@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>spark checkpoint cache区别</title>
+    <url>/2020/06/20/spark-checkpoint-cache%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<pre><code>cache会对rdd的血缘关系链条进行记忆，即使某个缓存的rdd由于节点问题丢失了，也会依据记忆的lineage重新产生。然而checkpoint会直接忘记rdd的lineages。</code></pre><p>​            There is a significant difference between cache and checkpoint. Cache materializes the RDD and keeps it in memory and/or disk. But the lineage of RDD (that is, seq of operations that generated the RDD) will be remembered, so that if there are node failures and parts of the cached RDDs are lost, they can be regenerated. However, checkpoint saves the RDD to an HDFS file and actually forgets the lineage completely. This is allows long lineages to be truncated and the data to be saved reliably in HDFS (which is naturally fault tolerant by replication). </p>
+]]></content>
+      <categories>
+        <category>spark</category>
+      </categories>
+      <tags>
+        <tag>spark</tag>
+        <tag>checkpoint</tag>
+        <tag>cache</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>spark rdd 弹性</title>
     <url>/2020/06/20/spark-rdd-%E5%BC%B9%E6%80%A7/</url>
     <content><![CDATA[<h4 id="自动的进行内存和磁盘数据存储的切换"><a href="#自动的进行内存和磁盘数据存储的切换" class="headerlink" title="自动的进行内存和磁盘数据存储的切换"></a>自动的进行内存和磁盘数据存储的切换</h4><p>​        Spark会优先把数据放到内存中，如果内存实在放不下，会放到磁盘里面，不但能计算内存放下的数据，也能计算内存放不下的数据。如果实际数据大于内存，则要考虑数据放置策略和优化算法。</p>
@@ -17,55 +31,9 @@
         <category>spark</category>
       </categories>
       <tags>
+        <tag>spark</tag>
         <tag>rdd</tag>
         <tag>弹性</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>北泉村在外干部介绍</title>
-    <url>/2020/06/19/%E5%90%8D%E4%BA%BA%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[<p>郭存华(1912—1991)，昔阳县孔氏乡北泉村人。1939年参加工作，1941年加入中国共产党，历任昔阳县二区武委会主任，县武委会参谋组长。1945年任太谷县武委会参谋组长，太谷县六区区委书记。1948年任中共太谷县委组织部长、县委书记。1954年任中共榆次县委书记。1957年任中共阳泉市委常务书记。1961年任中共平定县委书记。1966年任中共长治市委副书记，1970年任晋东南革委会副主任。1975年任中共晋中地委常委、农工部长，晋中行署副专员。1983年离休，1991年8月31日去世。</p>
-<p>耿怀英，男，汉族，1950年7月出生，<a href="https://baike.baidu.com/item/山西省/365266" target="_blank" rel="noopener">山西省</a><a href="https://baike.baidu.com/item/昔阳县/5631351" target="_blank" rel="noopener">昔阳县</a>人。1968年5月加入<a href="https://baike.baidu.com/item/中国共产党/117227" target="_blank" rel="noopener">中国共产党</a>。1997年<a href="https://baike.baidu.com/item/中央党校" target="_blank" rel="noopener">中央党校</a>在职研究生班党的学说与建设专业毕业，<a href="https://baike.baidu.com/item/中央党校" target="_blank" rel="noopener">中央党校</a>函授<a href="https://baike.baidu.com/item/研究生" target="_blank" rel="noopener">研究生</a>学历。2011年3年30日任山西省人大常委会<a href="https://baike.baidu.com/item/农村工作" target="_blank" rel="noopener">农村工作</a>委员会副主任。</p>
-<p>1968年12月 <a href="https://baike.baidu.com/item/昔阳县" target="_blank" rel="noopener">昔阳县</a>王寨公社团委书记；</p>
-<p>1972年5月 <a href="https://baike.baidu.com/item/共青团" target="_blank" rel="noopener">共青团</a>昔阳县委干事、沾尚公社干事；</p>
-<p>1973年10月 昔阳县刀把口公社党委副书记、书记；</p>
-<p>1978年10月 共青团昔阳县委书记；</p>
-<p>1980年8月 昔阳县大寨公社党委书记；</p>
-<p>1982年9月 省委党校中青年干部培训班学习；</p>
-<p>1983年10月 昔阳县委常委、纪委书记；</p>
-<p>1985年12月 昔阳县委副书记；</p>
-<p>1990年6月 <a href="https://baike.baidu.com/item/和顺县" target="_blank" rel="noopener">和顺县</a>委副书记、县长；</p>
-<p>1992年12月 <a href="https://baike.baidu.com/item/和顺县" target="_blank" rel="noopener">和顺县</a>委书记；</p>
-<p>1995年1月 晋中行署副专员（期间：1994.9–1997.1在中央党校中青年培训班和在职研究生班党的学说与建设专业学习）；</p>
-<p>2000年9月 <a href="https://baike.baidu.com/item/晋中市" target="_blank" rel="noopener">晋中市</a>委副书记；</p>
-<p>2004年12月 <a href="https://baike.baidu.com/item/忻州市" target="_blank" rel="noopener">忻州市</a>委副书记；</p>
-<p>2005年1月 忻州市委副书记、代市长；</p>
-<p>2005年3月 忻州市委副书记、市政府市长；</p>
-<p>2008年4月2日 <a href="https://baike.baidu.com/item/山西省" target="_blank" rel="noopener">山西省</a>林业厅厅长；</p>
-<p>2011年1月23日 山西省人大常委；</p>
-<p>2011年3年30日任山西省人大常委会农村工作委员会副主任。</p>
-<p>耿炬</p>
-<p>小名耿棠小，历任大寨中学校长，后调到昔阳中学任书记。</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>山西</tag>
-        <tag>家乡</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>spark checkpoint cache区别</title>
-    <url>/2020/06/20/spark-checkpoint-cache%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<pre><code>cache会对rdd的血缘关系链条进行记忆，即使某个缓存的rdd由于节点问题丢失了，也会依据记忆的lineage重新产生。然而checkpoint会直接忘记rdd的lineages。</code></pre><p>​            There is a significant difference between cache and checkpoint. Cache materializes the RDD and keeps it in memory and/or disk. But the lineage of RDD (that is, seq of operations that generated the RDD) will be remembered, so that if there are node failures and parts of the cached RDDs are lost, they can be regenerated. However, checkpoint saves the RDD to an HDFS file and actually forgets the lineage completely. This is allows long lineages to be truncated and the data to be saved reliably in HDFS (which is naturally fault tolerant by replication). </p>
-]]></content>
-      <categories>
-        <category>spark</category>
-      </categories>
-      <tags>
-        <tag>checkpoint</tag>
-        <tag>cache</tag>
       </tags>
   </entry>
   <entry>
@@ -110,6 +78,40 @@
 <p><img src="https://ss2.meipian.me/users/10787021/19bbea653c1449bd941256b1617c53fe.jpg?meipian-watermark/bucket/ivwen/key/dXNlcnMvMTA3ODcwMjEvMTliYmVhNjUzYzE0NDliZDk0MTI1NmIxNjE3YzUzZmUuanBn/nickname/5bCP5bOw5a2Q/userid/MTA3ODcwMjE=/sign/af042689c6133db7b306a25cf3cf39df%7cimageView2/2/w/750/h/1400/interlace/0/q/80" alt="img"></p>
 <p><img src="https://ss2.meipian.me/users/10787021/35a8c3a3d5f04abfb52c9f76d74e50a3.jpg?meipian-watermark/bucket/ivwen/key/dXNlcnMvMTA3ODcwMjEvMzVhOGMzYTNkNWYwNGFiZmI1MmM5Zjc2ZDc0ZTUwYTMuanBn/nickname/5bCP5bOw5a2Q/userid/MTA3ODcwMjE=/sign/af042689c6133db7b306a25cf3cf39df%7cimageView2/2/w/750/h/1400/interlace/0/q/80" alt="img"></p>
 <p><img src="https://ss2.meipian.me/users/10787021/e032d73d7299451c88eb9abafa066dee.jpg?meipian-watermark/bucket/ivwen/key/dXNlcnMvMTA3ODcwMjEvZTAzMmQ3M2Q3Mjk5NDUxYzg4ZWI5YWJhZmEwNjZkZWUuanBn/nickname/5bCP5bOw5a2Q/userid/MTA3ODcwMjE=/sign/af042689c6133db7b306a25cf3cf39df%7cimageView2/2/w/750/h/1400/interlace/0/q/80" alt="img"></p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>山西</tag>
+        <tag>家乡</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北泉村在外干部介绍</title>
+    <url>/2020/06/19/%E5%90%8D%E4%BA%BA%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<p>郭存华(1912—1991)，昔阳县孔氏乡北泉村人。1939年参加工作，1941年加入中国共产党，历任昔阳县二区武委会主任，县武委会参谋组长。1945年任太谷县武委会参谋组长，太谷县六区区委书记。1948年任中共太谷县委组织部长、县委书记。1954年任中共榆次县委书记。1957年任中共阳泉市委常务书记。1961年任中共平定县委书记。1966年任中共长治市委副书记，1970年任晋东南革委会副主任。1975年任中共晋中地委常委、农工部长，晋中行署副专员。1983年离休，1991年8月31日去世。</p>
+<p>耿怀英，男，汉族，1950年7月出生，<a href="https://baike.baidu.com/item/山西省/365266" target="_blank" rel="noopener">山西省</a><a href="https://baike.baidu.com/item/昔阳县/5631351" target="_blank" rel="noopener">昔阳县</a>人。1968年5月加入<a href="https://baike.baidu.com/item/中国共产党/117227" target="_blank" rel="noopener">中国共产党</a>。1997年<a href="https://baike.baidu.com/item/中央党校" target="_blank" rel="noopener">中央党校</a>在职研究生班党的学说与建设专业毕业，<a href="https://baike.baidu.com/item/中央党校" target="_blank" rel="noopener">中央党校</a>函授<a href="https://baike.baidu.com/item/研究生" target="_blank" rel="noopener">研究生</a>学历。2011年3年30日任山西省人大常委会<a href="https://baike.baidu.com/item/农村工作" target="_blank" rel="noopener">农村工作</a>委员会副主任。</p>
+<p>1968年12月 <a href="https://baike.baidu.com/item/昔阳县" target="_blank" rel="noopener">昔阳县</a>王寨公社团委书记；</p>
+<p>1972年5月 <a href="https://baike.baidu.com/item/共青团" target="_blank" rel="noopener">共青团</a>昔阳县委干事、沾尚公社干事；</p>
+<p>1973年10月 昔阳县刀把口公社党委副书记、书记；</p>
+<p>1978年10月 共青团昔阳县委书记；</p>
+<p>1980年8月 昔阳县大寨公社党委书记；</p>
+<p>1982年9月 省委党校中青年干部培训班学习；</p>
+<p>1983年10月 昔阳县委常委、纪委书记；</p>
+<p>1985年12月 昔阳县委副书记；</p>
+<p>1990年6月 <a href="https://baike.baidu.com/item/和顺县" target="_blank" rel="noopener">和顺县</a>委副书记、县长；</p>
+<p>1992年12月 <a href="https://baike.baidu.com/item/和顺县" target="_blank" rel="noopener">和顺县</a>委书记；</p>
+<p>1995年1月 晋中行署副专员（期间：1994.9–1997.1在中央党校中青年培训班和在职研究生班党的学说与建设专业学习）；</p>
+<p>2000年9月 <a href="https://baike.baidu.com/item/晋中市" target="_blank" rel="noopener">晋中市</a>委副书记；</p>
+<p>2004年12月 <a href="https://baike.baidu.com/item/忻州市" target="_blank" rel="noopener">忻州市</a>委副书记；</p>
+<p>2005年1月 忻州市委副书记、代市长；</p>
+<p>2005年3月 忻州市委副书记、市政府市长；</p>
+<p>2008年4月2日 <a href="https://baike.baidu.com/item/山西省" target="_blank" rel="noopener">山西省</a>林业厅厅长；</p>
+<p>2011年1月23日 山西省人大常委；</p>
+<p>2011年3年30日任山西省人大常委会农村工作委员会副主任。</p>
+<p>耿炬</p>
+<p>小名耿棠小，历任大寨中学校长，后调到昔阳中学任书记。</p>
 ]]></content>
       <categories>
         <category>生活</category>
