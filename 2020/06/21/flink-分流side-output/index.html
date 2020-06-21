@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="分流,SideOputput," />
 
 
 
@@ -81,13 +81,17 @@
 
 
 
-<meta name="description" content="独孤九剑">
-<meta property="og:type" content="website">
-<meta property="og:title" content="华仔的blog">
-<meta property="og:url" content="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/index.html">
+<meta name="description" content="filter分流如果是使用 filter 来进行拆分，也能满足我们的需求，但每次筛选过滤都要保留整个流，然后通过遍历整个流来获取相应的数据，显然很浪费性能。 split分流重写OutputSelector内部类的select()方法,根据数据所需要分流的类型反正不同的标签下,返回SplitStream,通过SplitStream的select()方法去选择相应的数据流。 只能一次分流，分流后的流不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flink 分流side output">
+<meta property="og:url" content="http://yoursite.com/2020/06/21/flink-%E5%88%86%E6%B5%81side-output/index.html">
 <meta property="og:site_name" content="华仔的blog">
-<meta property="og:description" content="独孤九剑">
+<meta property="og:description" content="filter分流如果是使用 filter 来进行拆分，也能满足我们的需求，但每次筛选过滤都要保留整个流，然后通过遍历整个流来获取相应的数据，显然很浪费性能。 split分流重写OutputSelector内部类的select()方法,根据数据所需要分流的类型反正不同的标签下,返回SplitStream,通过SplitStream的select()方法去选择相应的数据流。 只能一次分流，分流后的流不">
+<meta property="article:published_time" content="2020-06-21T06:53:26.000Z">
+<meta property="article:modified_time" content="2020-06-21T07:05:35.321Z">
 <meta property="article:author" content="风清扬">
+<meta property="article:tag" content="分流">
+<meta property="article:tag" content="SideOputput">
 <meta name="twitter:card" content="summary">
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/生活/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/06/21/flink-分流side-output/"/>
 
 
 
 
 
-  <title>分类: 生活 | 华仔的blog</title>
+  <title>flink 分流side output | 华仔的blog</title>
   
 
 
@@ -143,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -281,139 +285,225 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>生活<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/21/flink-%E5%88%86%E6%B5%81side-output/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="风清扬">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/huazai.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="华仔的blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2020/06/19/%E6%8A%B1%E6%84%A7%E5%B1%B1%E8%A5%BF/" itemprop="url">
-              
-                <span itemprop="name">抱愧山西</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">flink 分流side output</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-06-19T22:02:15+08:00"
-              content="2020-06-19" >
-          06-19
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-21T14:53:26+08:00">
+                2020-06-21
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index">
+                    <span itemprop="name">flink</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/06/19/%E5%90%8D%E4%BA%BA%E4%BB%8B%E7%BB%8D/" itemprop="url">
-              
-                <span itemprop="name">北泉村在外干部介绍</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-06-19T21:42:45+08:00"
-              content="2020-06-19" >
-          06-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/06/19/%E5%8C%97%E6%B3%89%E6%9D%91/" itemprop="url">
-              
-                <span itemprop="name">北泉村</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-06-19T21:40:04+08:00"
-              content="2020-06-19" >
-          06-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/06/19/%E5%B1%B1%E8%A5%BF%E4%BB%8B%E7%BB%8D/" itemprop="url">
-              
-                <span itemprop="name">山西介绍</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-06-19T21:34:47+08:00"
-              content="2020-06-19" >
-          06-19
-        </time>
-      </div>
-
-    </header>
-  </article>
+        <h4 id="filter分流"><a href="#filter分流" class="headerlink" title="filter分流"></a>filter分流</h4><p>如果是使用 filter 来进行拆分，也能满足我们的需求，但每次筛选过滤都要保留整个流，然后通过遍历整个流来获取相应的数据，显然很浪费性能。</p>
+<h4 id="split分流"><a href="#split分流" class="headerlink" title="split分流"></a>split分流</h4><p>重写OutputSelector内部类的select()方法,根据数据所需要分流的类型反正不同的标签下,返回SplitStream,通过SplitStream的select()方法去选择相应的数据流。 只能一次分流，分流后的流不能继续分流。</p>
+<h4 id="side-output分流"><a href="#side-output分流" class="headerlink" title="side output分流"></a>side output分流</h4><p>Flink 的 Side Output 则提供了能够在一个流里面就进行多次输出这样的功能。</p>
+<ol>
+<li><p>要使用 Side Output 的话，你首先需要做的是定义一个 OutputTag 来标识 Side Output，代表这个 Tag 是要收集哪种类型的数据，如果是要收集多种不一样类型的数据，那么你就需要定义多种 OutputTag。</p>
+</li>
+<li><p>使用下面几种函数来处理数据，在处理数据的过程中，进行判断将不同种类型的数据存到不同的 OutputTag 中去。</p>
+</li>
+</ol>
+<ul>
+<li><input disabled="" type="checkbox"> ProcessFunction</li>
+<li><input disabled="" type="checkbox"> KeyedProcessFunction</li>
+<li><input disabled="" type="checkbox"> CoProcessFunction</li>
+<li><input disabled="" type="checkbox"> ProcessWindowFunction</li>
+<li><input disabled="" type="checkbox"> ProcessAllWindowFunction</li>
+</ul>
+<ol start="3">
+<li>最后使用 getSideOutput 方法来获取不同 OutputTag 的数据</li>
+</ol>
+<h4 id="side-output分流-代码"><a href="#side-output分流-代码" class="headerlink" title="side output分流 代码"></a>side output分流 代码</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.flink.api.scala._</span><br><span class="line"><span class="keyword">import</span> org.apache.flink.examples.java.wordcount.util.<span class="type">WordCountData</span></span><br><span class="line"><span class="keyword">import</span> org.apache.flink.streaming.api.<span class="type">TimeCharacteristic</span></span><br><span class="line"><span class="keyword">import</span> org.apache.flink.streaming.api.functions.&#123;<span class="type">KeyedProcessFunction</span>, <span class="type">ProcessFunction</span>&#125;</span><br><span class="line"><span class="keyword">import</span> org.apache.flink.streaming.api.windowing.assigners.<span class="type">TumblingEventTimeWindows</span></span><br><span class="line"><span class="keyword">import</span> org.apache.flink.streaming.api.windowing.time.<span class="type">Time</span></span><br><span class="line"><span class="keyword">import</span> org.apache.flink.util.<span class="type">Collector</span></span><br><span class="line"><span class="keyword">import</span> org.apache.flink.api.java.functions.<span class="type">KeySelector</span></span><br><span class="line"><span class="keyword">import</span> org.apache.flink.api.java.utils.<span class="type">ParameterTool</span></span><br><span class="line"><span class="keyword">import</span> org.apache.flink.streaming.api.scala.&#123;<span class="type">OutputTag</span>, <span class="type">StreamExecutionEnvironment</span>&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">SideOputputExample</span> </span>&#123;</span><br><span class="line">  <span class="keyword">val</span> rejectedWordsTag = <span class="type">OutputTag</span>[<span class="type">String</span>](<span class="string">"rejected"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> params = <span class="type">ParameterTool</span>.fromArgs(args)</span><br><span class="line">    <span class="keyword">val</span> env = <span class="type">StreamExecutionEnvironment</span>.getExecutionEnvironment</span><br><span class="line">    env.setStreamTimeCharacteristic(<span class="type">TimeCharacteristic</span>.<span class="type">IngestionTime</span>)</span><br><span class="line">    env.getConfig.setGlobalJobParameters(params)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// get input data</span></span><br><span class="line">    <span class="keyword">val</span> text =</span><br><span class="line">      <span class="keyword">if</span> (params.has(<span class="string">"input"</span>)) &#123; <span class="comment">// read the text file from given input path</span></span><br><span class="line">        env.readTextFile(params.get(<span class="string">"input"</span>))</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="type">System</span>.out.println(<span class="string">"Executing WordCount example with default input data set."</span>)</span><br><span class="line">        <span class="type">System</span>.out.println(<span class="string">"Use --input to specify file input."</span>)</span><br><span class="line">        <span class="comment">// get default test text data</span></span><br><span class="line">        env.fromCollection(<span class="type">WordCountData</span>.<span class="type">WORDS</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="keyword">val</span> tokenized = text.keyBy(<span class="keyword">new</span> <span class="type">KeySelector</span>[<span class="type">String</span>, <span class="type">Integer</span>] &#123;</span><br><span class="line">      <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">getKey</span></span>(in: <span class="type">String</span>): <span class="type">Integer</span> = <span class="number">0</span></span><br><span class="line">    &#125;).process(<span class="keyword">new</span> <span class="type">ProcessFunction</span>[<span class="type">String</span>, (<span class="type">String</span>, <span class="type">Int</span>)] &#123;</span><br><span class="line">      <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">processElement</span></span>(value: <span class="type">String</span>, ctx: <span class="type">ProcessFunction</span>[<span class="type">String</span>, (<span class="type">String</span>, <span class="type">Int</span>)]#<span class="type">Context</span>, out: <span class="type">Collector</span>[(<span class="type">String</span>, <span class="type">Int</span>)]): <span class="type">Unit</span> = &#123;</span><br><span class="line">        <span class="keyword">val</span> tokens = value.toLowerCase.split(<span class="string">"\\W+"</span>)</span><br><span class="line">        <span class="keyword">for</span> (token &lt;- tokens) &#123;</span><br><span class="line">          <span class="keyword">if</span> (token.length &gt; <span class="number">5</span>) &#123;</span><br><span class="line">            ctx.output(rejectedWordsTag, token)</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (token.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            out.collect((token, <span class="number">1</span>))</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">val</span> rejectedWords = tokenized.getSideOutput(rejectedWordsTag).map(value =&gt; <span class="string">"rejected: "</span> + value)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> counts = tokenized.keyBy(<span class="number">0</span>).window(<span class="type">TumblingEventTimeWindows</span>.of(<span class="type">Time</span>.seconds(<span class="number">5</span>))).sum(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> (params.has(<span class="string">"output"</span>)) &#123;</span><br><span class="line">      counts.writeAsText(params.get(<span class="string">"output"</span>))</span><br><span class="line">      rejectedWords.writeAsText(params.get(<span class="string">"rejected-words-output"</span>))</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="type">System</span>.out.println(<span class="string">"Printing result to stdout. Use --output to specify output path."</span>)</span><br><span class="line">      counts.print()</span><br><span class="line">      rejectedWords.print()</span><br><span class="line">    &#125;</span><br><span class="line">    env.execute(<span class="string">"Streaming WordCount SideOutput"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="风清扬 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="风清扬 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%88%86%E6%B5%81/" rel="tag"># 分流</a>
+          
+            <a href="/tags/SideOputput/" rel="tag"># SideOputput</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/21/flink-%E7%BB%B4%E8%A1%A8%E5%85%B3%E8%81%94/" rel="next" title="flink 维表关联">
+                <i class="fa fa-chevron-left"></i> flink 维表关联
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -421,6 +511,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -441,8 +535,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -529,6 +632,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#filter分流"><span class="nav-number">1.</span> <span class="nav-text">filter分流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#split分流"><span class="nav-number">2.</span> <span class="nav-text">split分流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#side-output分流"><span class="nav-number">3.</span> <span class="nav-text">side output分流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#side-output分流-代码"><span class="nav-number">4.</span> <span class="nav-text">side output分流 代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -705,6 +824,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
