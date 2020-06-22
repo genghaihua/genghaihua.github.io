@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-06-22T07:05:24.946Z</updated>
+  <updated>2020-06-22T07:54:50.226Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>flink Window Function</title>
+    <link href="http://yoursite.com/2020/06/22/flink-Window-Function/"/>
+    <id>http://yoursite.com/2020/06/22/flink-Window-Function/</id>
+    <published>2020-06-22T07:48:02.000Z</published>
+    <updated>2020-06-22T07:54:50.226Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;Window-Function&quot;&gt;&lt;a href=&quot;#Window-Function&quot; class=&quot;headerlink&quot; title=&quot;Window Function&quot;&gt;&lt;/a&gt;Window
+        
+      
+    
+    </summary>
+    
+    
+      <category term="flink" scheme="http://yoursite.com/categories/flink/"/>
+    
+    
+      <category term="窗口" scheme="http://yoursite.com/tags/%E7%AA%97%E5%8F%A3/"/>
+    
+      <category term="WindowFunction" scheme="http://yoursite.com/tags/WindowFunction/"/>
+    
+  </entry>
   
   <entry>
     <title>flink 窗口分配器</title>
