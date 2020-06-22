@@ -34,6 +34,27 @@
       </tags>
   </entry>
   <entry>
+    <title>flink 窗口分配器</title>
+    <url>/2020/06/22/flink-%E7%AA%97%E5%8F%A3%E5%88%86%E9%85%8D%E5%99%A8/</url>
+    <content><![CDATA[<p>WindowAssigner负责将传入的元素分配给一个或多个窗口。Flink基于一些常见的应用场景，为我们提供了几个预定义的WindowAssigner，分别是滚动窗口（tumbling windows）、滑动窗口（sliding windows）、会话窗口（session windows）以及全局窗口（global windows）。</p>
+<p>我们也可以通过继承WindowAssigner类来自定义窗口分配器逻辑。Flink内置的WindowAssigner中，除了global windows，其余几个都是基于时间（processing time or event time）来为窗口分配元素。</p>
+<h4 id="Tumbling-Windows"><a href="#Tumbling-Windows" class="headerlink" title="Tumbling Windows"></a>Tumbling Windows</h4><p>滚动窗口分配器会将每个元素分配给一个指定窗口大小的窗口。滚动窗口具有固定的窗口大小，并且窗口之间不会重叠。比如下图展示的是一个设定为5分钟窗口大小的滚动窗口，每五分钟会创建一个新的窗口。</p>
+<h4 id="Sliding-Windows"><a href="#Sliding-Windows" class="headerlink" title="Sliding Windows"></a>Sliding Windows</h4><p>滑动窗口分配器同样是将元素分配给固定大小的时间窗口，窗口大小的配置方式与滚动窗口一样，不同之处在于，滑动窗口还有一个额外的<code>slide</code>参数用于控制窗口滑动的频率。</p>
+<p>窗口之间的数据重叠大小根据 Windows size 和 Sliding time 决定，当 Slide size 小于 Windows size 便会发生窗口重叠，Slide size 大于 Windows size 就会出现窗口不连续，数据可能不能在任何一个窗口内计算，Slide size 和 Windows size 相等时，Sliding Windows 其实就是 Tumbing Windows。　</p>
+<h4 id="Session-Windows"><a href="#Session-Windows" class="headerlink" title="Session Windows"></a>Session Windows</h4><p>会话窗口通过活动会话来对元素进行分组。不同于滚动窗口和滑动窗口，会话窗口不会重叠，也没有固定的开始、结束时间。当一个会话窗口在指定的时间区间内没有接收到新的数据时，这个窗口将会被关闭。会话窗口分配器可以直接配置一个静态常量会话间隔，也可以通过函数来动态指定会话间隔时间。</p>
+<p> 会话窗口（Session Windows）主要是将某段时间内活跃的较高的数据聚合成一个窗口进行计算，窗口触发的条件是 Session Gap，是指在规定的时间内，如果没有数据活跃接入，则认为窗口结束，然后触发窗口计算结果。需要注意的是如果数据一直不间断进入窗口，也会导致窗口不触发的情况。与滑动窗口、滚动窗口不同的是，Session Windows 不需要由固定的 windows size 和 slide time，只需要定义 session gap，来规定不活跃数据的时间上限即可。</p>
+<p><strong>注意：</strong>由于会话窗口没有固定的开始结束时间，它的计算方法与滚动窗口、滑动窗口有所不同。在一个会话窗口算子内部会为每一个接收到的元素创建一个新的窗口，如果这些元素之间的时间间隔小于定义的会话窗口间隔，则将合并到一个窗口。为了能够进行窗口合并，我们需要为会话窗口定义一个<code>Tigger</code>函数和<code>Window Function</code>函数（例如ReduceFunction, AggregateFunction, or ProcessWindowFunction. FoldFunction不能用于合并）。</p>
+<h4 id="Global-Windows"><a href="#Global-Windows" class="headerlink" title="Global Windows"></a>Global Windows</h4><p>全局窗口分配器会将具有相同key值的所有元素分配在同一个窗口。这种窗口模式下需要我们设置一个自定义的<code>Trigger</code>，否则将不会执行任何计算，这是因为全局窗口中没有一个可以处理聚合元素的自然末端。</p>
+]]></content>
+      <categories>
+        <category>flink</category>
+      </categories>
+      <tags>
+        <tag>窗口</tag>
+        <tag>WindowAssigner</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>flink 维表关联</title>
     <url>/2020/06/21/flink-%E7%BB%B4%E8%A1%A8%E5%85%B3%E8%81%94/</url>
     <content><![CDATA[<h4 id="实时查询维表"><a href="#实时查询维表" class="headerlink" title="实时查询维表"></a>实时查询维表</h4><p>同步实时数据库查找关联是最为简单的关联方式，只需要在一个 Map 或者 FlatMap 函数中访问数据库，处理好关联逻辑后，将结果数据输出。</p>
@@ -80,6 +101,40 @@
         <tag>spark</tag>
         <tag>checkpoint</tag>
         <tag>cache</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北泉村在外干部介绍</title>
+    <url>/2020/06/19/%E5%90%8D%E4%BA%BA%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<p>郭存华(1912—1991)，昔阳县孔氏乡北泉村人。1939年参加工作，1941年加入中国共产党，历任昔阳县二区武委会主任，县武委会参谋组长。1945年任太谷县武委会参谋组长，太谷县六区区委书记。1948年任中共太谷县委组织部长、县委书记。1954年任中共榆次县委书记。1957年任中共阳泉市委常务书记。1961年任中共平定县委书记。1966年任中共长治市委副书记，1970年任晋东南革委会副主任。1975年任中共晋中地委常委、农工部长，晋中行署副专员。1983年离休，1991年8月31日去世。</p>
+<p>耿怀英，男，汉族，1950年7月出生，<a href="https://baike.baidu.com/item/山西省/365266" target="_blank" rel="noopener">山西省</a><a href="https://baike.baidu.com/item/昔阳县/5631351" target="_blank" rel="noopener">昔阳县</a>人。1968年5月加入<a href="https://baike.baidu.com/item/中国共产党/117227" target="_blank" rel="noopener">中国共产党</a>。1997年<a href="https://baike.baidu.com/item/中央党校" target="_blank" rel="noopener">中央党校</a>在职研究生班党的学说与建设专业毕业，<a href="https://baike.baidu.com/item/中央党校" target="_blank" rel="noopener">中央党校</a>函授<a href="https://baike.baidu.com/item/研究生" target="_blank" rel="noopener">研究生</a>学历。2011年3年30日任山西省人大常委会<a href="https://baike.baidu.com/item/农村工作" target="_blank" rel="noopener">农村工作</a>委员会副主任。</p>
+<p>1968年12月 <a href="https://baike.baidu.com/item/昔阳县" target="_blank" rel="noopener">昔阳县</a>王寨公社团委书记；</p>
+<p>1972年5月 <a href="https://baike.baidu.com/item/共青团" target="_blank" rel="noopener">共青团</a>昔阳县委干事、沾尚公社干事；</p>
+<p>1973年10月 昔阳县刀把口公社党委副书记、书记；</p>
+<p>1978年10月 共青团昔阳县委书记；</p>
+<p>1980年8月 昔阳县大寨公社党委书记；</p>
+<p>1982年9月 省委党校中青年干部培训班学习；</p>
+<p>1983年10月 昔阳县委常委、纪委书记；</p>
+<p>1985年12月 昔阳县委副书记；</p>
+<p>1990年6月 <a href="https://baike.baidu.com/item/和顺县" target="_blank" rel="noopener">和顺县</a>委副书记、县长；</p>
+<p>1992年12月 <a href="https://baike.baidu.com/item/和顺县" target="_blank" rel="noopener">和顺县</a>委书记；</p>
+<p>1995年1月 晋中行署副专员（期间：1994.9–1997.1在中央党校中青年培训班和在职研究生班党的学说与建设专业学习）；</p>
+<p>2000年9月 <a href="https://baike.baidu.com/item/晋中市" target="_blank" rel="noopener">晋中市</a>委副书记；</p>
+<p>2004年12月 <a href="https://baike.baidu.com/item/忻州市" target="_blank" rel="noopener">忻州市</a>委副书记；</p>
+<p>2005年1月 忻州市委副书记、代市长；</p>
+<p>2005年3月 忻州市委副书记、市政府市长；</p>
+<p>2008年4月2日 <a href="https://baike.baidu.com/item/山西省" target="_blank" rel="noopener">山西省</a>林业厅厅长；</p>
+<p>2011年1月23日 山西省人大常委；</p>
+<p>2011年3年30日任山西省人大常委会农村工作委员会副主任。</p>
+<p>耿炬</p>
+<p>小名耿棠小，历任大寨中学校长，后调到昔阳中学任书记。</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>山西</tag>
+        <tag>家乡</tag>
       </tags>
   </entry>
   <entry>
@@ -176,6 +231,28 @@
       <tags>
         <tag>山西</tag>
         <tag>旅游</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>spark rdd 弹性</title>
+    <url>/2020/06/20/spark-rdd-%E5%BC%B9%E6%80%A7/</url>
+    <content><![CDATA[<h4 id="自动的进行内存和磁盘数据存储的切换"><a href="#自动的进行内存和磁盘数据存储的切换" class="headerlink" title="自动的进行内存和磁盘数据存储的切换"></a>自动的进行内存和磁盘数据存储的切换</h4><p>​        Spark会优先把数据放到内存中，如果内存实在放不下，会放到磁盘里面，不但能计算内存放下的数据，也能计算内存放不下的数据。如果实际数据大于内存，则要考虑数据放置策略和优化算法。</p>
+<h4 id="基于Lineage的高效容错（第n个节点出错，会从第n-1个节点恢复，血统容错）"><a href="#基于Lineage的高效容错（第n个节点出错，会从第n-1个节点恢复，血统容错）" class="headerlink" title="基于Lineage的高效容错（第n个节点出错，会从第n-1个节点恢复，血统容错）"></a>基于Lineage的高效容错（第n个节点出错，会从第n-1个节点恢复，血统容错）</h4><p>​        Linage是用于记录RDD的父子依赖关系，子RDD会记录父RDD，且各个分片之间的数据互不影响。当出现错误的时候，只需要恢复单个rdd即可。</p>
+<p>​        Spark的RDD只有在Action操作的时候才会真正触发计算，而Transform操作是惰性的，所以期间只有在Action操作的时候才会记录到CheckPoint中。</p>
+<h4 id="Task如果失败会自动进行特定次数的重试"><a href="#Task如果失败会自动进行特定次数的重试" class="headerlink" title="Task如果失败会自动进行特定次数的重试"></a>Task如果失败会自动进行特定次数的重试</h4><p>​        缺省情况下，会自动重试4次。spark.task.maxFailures参数来修改缺省值</p>
+<h4 id="Stage如果失败会自动进行特定次数的重试"><a href="#Stage如果失败会自动进行特定次数的重试" class="headerlink" title="Stage如果失败会自动进行特定次数的重试"></a>Stage如果失败会自动进行特定次数的重试</h4><p>​        stage对象可以记录并跟踪多个StageInfo，缺省的重试次数也是4次。且可以直接运行计算失败的阶段，值计算失败的数据分片。</p>
+<h4 id="checkpoint和persist"><a href="#checkpoint和persist" class="headerlink" title="checkpoint和persist"></a>checkpoint和persist</h4><p>​        Checkpoin和Persist都可以由我们自己来调用。checkpoint是对RDD进行标记，并且产生对应的一系列文件，且所有父依赖都会被删除，是整个Linage的终点。persist工作的主体RDD会把计算的分片结果保存在内存或磁盘上，以确保下次针对同一个RDD的调用可以重用。</p>
+<h4 id="数据调度弹性-DAG-TASK-和资源-管理无关"><a href="#数据调度弹性-DAG-TASK-和资源-管理无关" class="headerlink" title="数据调度弹性,DAG TASK 和资源 管理无关"></a>数据调度弹性,DAG TASK 和资源 管理无关</h4><p>​        Spark将执行模型抽象为DAG，可以让多个Stage任务串联或者并行执行，而无需将中间结果写入到HDFS中。这样当某个节点故障的时候，可以由其他节点来执行出错的任务。</p>
+<h4 id="数据分片的高度弹性-人工自由设置分片函数"><a href="#数据分片的高度弹性-人工自由设置分片函数" class="headerlink" title="数据分片的高度弹性(人工自由设置分片函数),"></a>数据分片的高度弹性(人工自由设置分片函数),</h4><p>​        两个算子repartition coalesce</p>
+<p>​        Spark进行数据分片的时候，默认将数据存放在内存中，当内存不够的时候，会将一部分存放到磁盘上。如经过分片后，某个Partition非常小，就可以合并多个小的partition来计算，而不用每个partition都起一个线程。</p>
+]]></content>
+      <categories>
+        <category>spark</category>
+      </categories>
+      <tags>
+        <tag>spark</tag>
+        <tag>rdd</tag>
+        <tag>弹性</tag>
       </tags>
   </entry>
   <entry>
@@ -336,62 +413,6 @@
       <tags>
         <tag>山西</tag>
         <tag>晋商</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>北泉村在外干部介绍</title>
-    <url>/2020/06/19/%E5%90%8D%E4%BA%BA%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[<p>郭存华(1912—1991)，昔阳县孔氏乡北泉村人。1939年参加工作，1941年加入中国共产党，历任昔阳县二区武委会主任，县武委会参谋组长。1945年任太谷县武委会参谋组长，太谷县六区区委书记。1948年任中共太谷县委组织部长、县委书记。1954年任中共榆次县委书记。1957年任中共阳泉市委常务书记。1961年任中共平定县委书记。1966年任中共长治市委副书记，1970年任晋东南革委会副主任。1975年任中共晋中地委常委、农工部长，晋中行署副专员。1983年离休，1991年8月31日去世。</p>
-<p>耿怀英，男，汉族，1950年7月出生，<a href="https://baike.baidu.com/item/山西省/365266" target="_blank" rel="noopener">山西省</a><a href="https://baike.baidu.com/item/昔阳县/5631351" target="_blank" rel="noopener">昔阳县</a>人。1968年5月加入<a href="https://baike.baidu.com/item/中国共产党/117227" target="_blank" rel="noopener">中国共产党</a>。1997年<a href="https://baike.baidu.com/item/中央党校" target="_blank" rel="noopener">中央党校</a>在职研究生班党的学说与建设专业毕业，<a href="https://baike.baidu.com/item/中央党校" target="_blank" rel="noopener">中央党校</a>函授<a href="https://baike.baidu.com/item/研究生" target="_blank" rel="noopener">研究生</a>学历。2011年3年30日任山西省人大常委会<a href="https://baike.baidu.com/item/农村工作" target="_blank" rel="noopener">农村工作</a>委员会副主任。</p>
-<p>1968年12月 <a href="https://baike.baidu.com/item/昔阳县" target="_blank" rel="noopener">昔阳县</a>王寨公社团委书记；</p>
-<p>1972年5月 <a href="https://baike.baidu.com/item/共青团" target="_blank" rel="noopener">共青团</a>昔阳县委干事、沾尚公社干事；</p>
-<p>1973年10月 昔阳县刀把口公社党委副书记、书记；</p>
-<p>1978年10月 共青团昔阳县委书记；</p>
-<p>1980年8月 昔阳县大寨公社党委书记；</p>
-<p>1982年9月 省委党校中青年干部培训班学习；</p>
-<p>1983年10月 昔阳县委常委、纪委书记；</p>
-<p>1985年12月 昔阳县委副书记；</p>
-<p>1990年6月 <a href="https://baike.baidu.com/item/和顺县" target="_blank" rel="noopener">和顺县</a>委副书记、县长；</p>
-<p>1992年12月 <a href="https://baike.baidu.com/item/和顺县" target="_blank" rel="noopener">和顺县</a>委书记；</p>
-<p>1995年1月 晋中行署副专员（期间：1994.9–1997.1在中央党校中青年培训班和在职研究生班党的学说与建设专业学习）；</p>
-<p>2000年9月 <a href="https://baike.baidu.com/item/晋中市" target="_blank" rel="noopener">晋中市</a>委副书记；</p>
-<p>2004年12月 <a href="https://baike.baidu.com/item/忻州市" target="_blank" rel="noopener">忻州市</a>委副书记；</p>
-<p>2005年1月 忻州市委副书记、代市长；</p>
-<p>2005年3月 忻州市委副书记、市政府市长；</p>
-<p>2008年4月2日 <a href="https://baike.baidu.com/item/山西省" target="_blank" rel="noopener">山西省</a>林业厅厅长；</p>
-<p>2011年1月23日 山西省人大常委；</p>
-<p>2011年3年30日任山西省人大常委会农村工作委员会副主任。</p>
-<p>耿炬</p>
-<p>小名耿棠小，历任大寨中学校长，后调到昔阳中学任书记。</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>山西</tag>
-        <tag>家乡</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>spark rdd 弹性</title>
-    <url>/2020/06/20/spark-rdd-%E5%BC%B9%E6%80%A7/</url>
-    <content><![CDATA[<h4 id="自动的进行内存和磁盘数据存储的切换"><a href="#自动的进行内存和磁盘数据存储的切换" class="headerlink" title="自动的进行内存和磁盘数据存储的切换"></a>自动的进行内存和磁盘数据存储的切换</h4><p>​        Spark会优先把数据放到内存中，如果内存实在放不下，会放到磁盘里面，不但能计算内存放下的数据，也能计算内存放不下的数据。如果实际数据大于内存，则要考虑数据放置策略和优化算法。</p>
-<h4 id="基于Lineage的高效容错（第n个节点出错，会从第n-1个节点恢复，血统容错）"><a href="#基于Lineage的高效容错（第n个节点出错，会从第n-1个节点恢复，血统容错）" class="headerlink" title="基于Lineage的高效容错（第n个节点出错，会从第n-1个节点恢复，血统容错）"></a>基于Lineage的高效容错（第n个节点出错，会从第n-1个节点恢复，血统容错）</h4><p>​        Linage是用于记录RDD的父子依赖关系，子RDD会记录父RDD，且各个分片之间的数据互不影响。当出现错误的时候，只需要恢复单个rdd即可。</p>
-<p>​        Spark的RDD只有在Action操作的时候才会真正触发计算，而Transform操作是惰性的，所以期间只有在Action操作的时候才会记录到CheckPoint中。</p>
-<h4 id="Task如果失败会自动进行特定次数的重试"><a href="#Task如果失败会自动进行特定次数的重试" class="headerlink" title="Task如果失败会自动进行特定次数的重试"></a>Task如果失败会自动进行特定次数的重试</h4><p>​        缺省情况下，会自动重试4次。spark.task.maxFailures参数来修改缺省值</p>
-<h4 id="Stage如果失败会自动进行特定次数的重试"><a href="#Stage如果失败会自动进行特定次数的重试" class="headerlink" title="Stage如果失败会自动进行特定次数的重试"></a>Stage如果失败会自动进行特定次数的重试</h4><p>​        stage对象可以记录并跟踪多个StageInfo，缺省的重试次数也是4次。且可以直接运行计算失败的阶段，值计算失败的数据分片。</p>
-<h4 id="checkpoint和persist"><a href="#checkpoint和persist" class="headerlink" title="checkpoint和persist"></a>checkpoint和persist</h4><p>​        Checkpoin和Persist都可以由我们自己来调用。checkpoint是对RDD进行标记，并且产生对应的一系列文件，且所有父依赖都会被删除，是整个Linage的终点。persist工作的主体RDD会把计算的分片结果保存在内存或磁盘上，以确保下次针对同一个RDD的调用可以重用。</p>
-<h4 id="数据调度弹性-DAG-TASK-和资源-管理无关"><a href="#数据调度弹性-DAG-TASK-和资源-管理无关" class="headerlink" title="数据调度弹性,DAG TASK 和资源 管理无关"></a>数据调度弹性,DAG TASK 和资源 管理无关</h4><p>​        Spark将执行模型抽象为DAG，可以让多个Stage任务串联或者并行执行，而无需将中间结果写入到HDFS中。这样当某个节点故障的时候，可以由其他节点来执行出错的任务。</p>
-<h4 id="数据分片的高度弹性-人工自由设置分片函数"><a href="#数据分片的高度弹性-人工自由设置分片函数" class="headerlink" title="数据分片的高度弹性(人工自由设置分片函数),"></a>数据分片的高度弹性(人工自由设置分片函数),</h4><p>​        两个算子repartition coalesce</p>
-<p>​        Spark进行数据分片的时候，默认将数据存放在内存中，当内存不够的时候，会将一部分存放到磁盘上。如经过分片后，某个Partition非常小，就可以合并多个小的partition来计算，而不用每个partition都起一个线程。</p>
-]]></content>
-      <categories>
-        <category>spark</category>
-      </categories>
-      <tags>
-        <tag>spark</tag>
-        <tag>rdd</tag>
-        <tag>弹性</tag>
       </tags>
   </entry>
 </search>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-06-21T07:05:35.321Z</updated>
+  <updated>2020-06-22T07:05:24.946Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,40 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>flink 窗口分配器</title>
+    <link href="http://yoursite.com/2020/06/22/flink-%E7%AA%97%E5%8F%A3%E5%88%86%E9%85%8D%E5%99%A8/"/>
+    <id>http://yoursite.com/2020/06/22/flink-%E7%AA%97%E5%8F%A3%E5%88%86%E9%85%8D%E5%99%A8/</id>
+    <published>2020-06-22T06:32:43.000Z</published>
+    <updated>2020-06-22T07:05:24.946Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;WindowAssigner负责将传入的元素分配给一个或多个窗口。Flink基于一些常见的应用场景，为我们提供了几个预定义的WindowAssigner，分别是滚动窗口（tumbling windows）、滑动窗口（sliding
+        
+      
+    
+    </summary>
+    
+    
+      <category term="flink" scheme="http://yoursite.com/categories/flink/"/>
+    
+    
+      <category term="窗口" scheme="http://yoursite.com/tags/%E7%AA%97%E5%8F%A3/"/>
+    
+      <category term="WindowAssigner" scheme="http://yoursite.com/tags/WindowAssigner/"/>
+    
+  </entry>
+  
+  <entry>
     <title>flink 分流side output</title>
     <link href="http://yoursite.com/2020/06/21/flink-%E5%88%86%E6%B5%81side-output/"/>
     <id>http://yoursite.com/2020/06/21/flink-%E5%88%86%E6%B5%81side-output/</id>
     <published>2020-06-21T06:53:26.000Z</published>
-    <updated>2020-06-21T07:05:35.321Z</updated>
+    <updated>2020-06-21T07:08:42.671Z</updated>
     
     <summary type="html">
     
