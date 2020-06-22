@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-06-22T08:24:41.386Z</updated>
+  <updated>2020-06-22T08:45:02.157Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>flink sideOutputLateData</title>
+    <link href="http://yoursite.com/2020/06/22/flink-sideOutputLateData/"/>
+    <id>http://yoursite.com/2020/06/22/flink-sideOutputLateData/</id>
+    <published>2020-06-22T08:35:16.000Z</published>
+    <updated>2020-06-22T08:45:02.157Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;使用Flink的侧输出(&lt;a href=&quot;https://ci.apache.org/projects/flink/flink-docs-release-1.9/dev/stream/side_output.html)特性，你可以获得一个已经被丢弃的延迟数据流。&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="flink" scheme="http://yoursite.com/categories/flink/"/>
+    
+    
+      <category term="窗口" scheme="http://yoursite.com/tags/%E7%AA%97%E5%8F%A3/"/>
+    
+      <category term="sideOutputLateData" scheme="http://yoursite.com/tags/sideOutputLateData/"/>
+    
+  </entry>
   
   <entry>
     <title>flink Evictors</title>
