@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-06-22T07:54:50.226Z</updated>
+  <updated>2020-06-22T08:24:41.386Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,66 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>flink Evictors</title>
+    <link href="http://yoursite.com/2020/06/22/flink-Evictors/"/>
+    <id>http://yoursite.com/2020/06/22/flink-Evictors/</id>
+    <published>2020-06-22T08:18:18.000Z</published>
+    <updated>2020-06-22T08:24:41.386Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Flink窗口模式允许我们指定一个WindowAssigner和Trigger之外的可选的Evictor。Evictor可以在触发器启动之后、窗口函数作用之前或之后移出窗口中的元素。&lt;/p&gt;
+&lt;figure class=&quot;highlight
+        
+      
+    
+    </summary>
+    
+    
+      <category term="flink" scheme="http://yoursite.com/categories/flink/"/>
+    
+    
+      <category term="窗口" scheme="http://yoursite.com/tags/%E7%AA%97%E5%8F%A3/"/>
+    
+      <category term="Evictors" scheme="http://yoursite.com/tags/Evictors/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>flink Triggers</title>
+    <link href="http://yoursite.com/2020/06/22/flink-Triggers/"/>
+    <id>http://yoursite.com/2020/06/22/flink-Triggers/</id>
+    <published>2020-06-22T08:04:27.000Z</published>
+    <updated>2020-06-22T08:16:56.152Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Trigger用于决定窗口什么时候被window function处理。Flink中每个WindowAssigner都有一个默认的Trigger。我们也可以通过&lt;code&gt;trigger(...)&lt;/code&gt;函数来自定义触发规则。&lt;/p&gt;
+&lt;figure
+        
+      
+    
+    </summary>
+    
+    
+      <category term="flink" scheme="http://yoursite.com/categories/flink/"/>
+    
+    
+      <category term="窗口" scheme="http://yoursite.com/tags/%E7%AA%97%E5%8F%A3/"/>
+    
+      <category term="Triggers" scheme="http://yoursite.com/tags/Triggers/"/>
+    
+  </entry>
   
   <entry>
     <title>flink Window Function</title>

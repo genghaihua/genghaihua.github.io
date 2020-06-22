@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>flink Evictors</title>
+    <url>/2020/06/22/flink-Evictors/</url>
+    <content><![CDATA[<p>Flink窗口模式允许我们指定一个WindowAssigner和Trigger之外的可选的Evictor。Evictor可以在触发器启动之后、窗口函数作用之前或之后移出窗口中的元素。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Optionally evicts elements. Called before windowing function.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> elements The elements currently in the pane.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> size The current number of elements in the pane.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> window The &#123;<span class="doctag">@link</span> Window&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> evictorContext The context for the Evictor</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">evictBefore</span><span class="params">(Iterable&lt;TimestampedValue&lt;T&gt;&gt; elements, <span class="keyword">int</span> size, W window, EvictorContext evictorContext)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Optionally evicts elements. Called after windowing function.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> elements The elements currently in the pane.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> size The current number of elements in the pane.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> window The &#123;<span class="doctag">@link</span> Window&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> evictorContext The context for the Evictor</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">evictAfter</span><span class="params">(Iterable&lt;TimestampedValue&lt;T&gt;&gt; elements, <span class="keyword">int</span> size, W window, EvictorContext evictorContext)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>Flink为我们提供了三个预定义的evictors：</p>
+<ul>
+<li><code>CountEvictor</code>: 保留窗口中用户指定数量的元素，从窗口缓冲区开始部分删除其他元素。</li>
+<li><code>DeltaEvictor</code>: 获取一个DeltaFunction函数和阈值，计算窗口缓冲区中其余元素与最后一个元素的Delta值，然后将Delta值大于等于阈值的元素移除。</li>
+<li><code>TimeEvictor</code>: 持有一个毫秒级的<code>interval</code>参数，对于一个给定窗口，找到元素中的最大时间戳max_ts，然后删除那些时间戳小于max_ts - interval值的元素。</li>
+</ul>
+<p>所有预定义的Evictor默认在窗口函数作用之前执行。也可以传入参数指定在窗口函数执行之后执行。如下面TimeEvictor中默认doEvictAfter为false。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">TimeEvictor</span><span class="params">(<span class="keyword">long</span> windowSize)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.windowSize = windowSize;</span><br><span class="line">		<span class="keyword">this</span>.doEvictAfter = <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">TimeEvictor</span><span class="params">(<span class="keyword">long</span> windowSize, <span class="keyword">boolean</span> doEvictAfter)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">this</span>.windowSize = windowSize;</span><br><span class="line">   <span class="keyword">this</span>.doEvictAfter = doEvictAfter;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>flink</category>
+      </categories>
+      <tags>
+        <tag>窗口</tag>
+        <tag>Evictors</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>flink Window Function</title>
     <url>/2020/06/22/flink-Window-Function/</url>
     <content><![CDATA[<h3 id="Window-Function"><a href="#Window-Function" class="headerlink" title="Window Function"></a>Window Function</h3><p>定义好窗口分配器之后，我们需要指定作用于每个窗口上的计算。这可以通过指定Window Function来实现，一旦系统确定了某个窗口已经准备好进行处理，该函数将会处理窗口中的每个元素。</p>
@@ -37,6 +59,57 @@
       </tags>
   </entry>
   <entry>
+    <title>flink Triggers</title>
+    <url>/2020/06/22/flink-Triggers/</url>
+    <content><![CDATA[<p>Trigger用于决定窗口什么时候被window function处理。Flink中每个WindowAssigner都有一个默认的Trigger。我们也可以通过<code>trigger(...)</code>函数来自定义触发规则。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">* A &#123;@code Trigger&#125; determines when a pane of a window should be evaluated to emit the</span><br><span class="line">* results for that part of the window.</span><br></pre></td></tr></table></figure>
+
+<p>未完待续</p>
+]]></content>
+      <categories>
+        <category>flink</category>
+      </categories>
+      <tags>
+        <tag>窗口</tag>
+        <tag>Triggers</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>flink 窗口分配器</title>
+    <url>/2020/06/22/flink-%E7%AA%97%E5%8F%A3%E5%88%86%E9%85%8D%E5%99%A8/</url>
+    <content><![CDATA[<p>WindowAssigner负责将传入的元素分配给一个或多个窗口。Flink基于一些常见的应用场景，为我们提供了几个预定义的WindowAssigner，分别是滚动窗口（tumbling windows）、滑动窗口（sliding windows）、会话窗口（session windows）以及全局窗口（global windows）。</p>
+<p>我们也可以通过继承WindowAssigner类来自定义窗口分配器逻辑。Flink内置的WindowAssigner中，除了global windows，其余几个都是基于时间（processing time or event time）来为窗口分配元素。</p>
+<h4 id="Tumbling-Windows"><a href="#Tumbling-Windows" class="headerlink" title="Tumbling Windows"></a>Tumbling Windows</h4><p>滚动窗口分配器会将每个元素分配给一个指定窗口大小的窗口。滚动窗口具有固定的窗口大小，并且窗口之间不会重叠。比如下图展示的是一个设定为5分钟窗口大小的滚动窗口，每五分钟会创建一个新的窗口。</p>
+<h4 id="Sliding-Windows"><a href="#Sliding-Windows" class="headerlink" title="Sliding Windows"></a>Sliding Windows</h4><p>滑动窗口分配器同样是将元素分配给固定大小的时间窗口，窗口大小的配置方式与滚动窗口一样，不同之处在于，滑动窗口还有一个额外的<code>slide</code>参数用于控制窗口滑动的频率。</p>
+<p>窗口之间的数据重叠大小根据 Windows size 和 Sliding time 决定，当 Slide size 小于 Windows size 便会发生窗口重叠，Slide size 大于 Windows size 就会出现窗口不连续，数据可能不能在任何一个窗口内计算，Slide size 和 Windows size 相等时，Sliding Windows 其实就是 Tumbing Windows。　</p>
+<h4 id="Session-Windows"><a href="#Session-Windows" class="headerlink" title="Session Windows"></a>Session Windows</h4><p>会话窗口通过活动会话来对元素进行分组。不同于滚动窗口和滑动窗口，会话窗口不会重叠，也没有固定的开始、结束时间。当一个会话窗口在指定的时间区间内没有接收到新的数据时，这个窗口将会被关闭。会话窗口分配器可以直接配置一个静态常量会话间隔，也可以通过函数来动态指定会话间隔时间。</p>
+<p> 会话窗口（Session Windows）主要是将某段时间内活跃的较高的数据聚合成一个窗口进行计算，窗口触发的条件是 Session Gap，是指在规定的时间内，如果没有数据活跃接入，则认为窗口结束，然后触发窗口计算结果。需要注意的是如果数据一直不间断进入窗口，也会导致窗口不触发的情况。与滑动窗口、滚动窗口不同的是，Session Windows 不需要由固定的 windows size 和 slide time，只需要定义 session gap，来规定不活跃数据的时间上限即可。</p>
+<p><strong>注意：</strong>由于会话窗口没有固定的开始结束时间，它的计算方法与滚动窗口、滑动窗口有所不同。在一个会话窗口算子内部会为每一个接收到的元素创建一个新的窗口，如果这些元素之间的时间间隔小于定义的会话窗口间隔，则将合并到一个窗口。为了能够进行窗口合并，我们需要为会话窗口定义一个<code>Tigger</code>函数和<code>Window Function</code>函数（例如ReduceFunction, AggregateFunction, or ProcessWindowFunction. FoldFunction不能用于合并）。</p>
+<h4 id="Global-Windows"><a href="#Global-Windows" class="headerlink" title="Global Windows"></a>Global Windows</h4><p>全局窗口分配器会将具有相同key值的所有元素分配在同一个窗口。这种窗口模式下需要我们设置一个自定义的<code>Trigger</code>，否则将不会执行任何计算，这是因为全局窗口中没有一个可以处理聚合元素的自然末端。</p>
+]]></content>
+      <categories>
+        <category>flink</category>
+      </categories>
+      <tags>
+        <tag>窗口</tag>
+        <tag>WindowAssigner</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>spark checkpoint cache区别</title>
+    <url>/2020/06/20/spark-checkpoint-cache%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<pre><code>cache会对rdd的血缘关系链条进行记忆，即使某个缓存的rdd由于节点问题丢失了，也会依据记忆的lineage重新产生。然而checkpoint会直接忘记rdd的lineages。</code></pre><p>​            There is a significant difference between cache and checkpoint. Cache materializes the RDD and keeps it in memory and/or disk. But the lineage of RDD (that is, seq of operations that generated the RDD) will be remembered, so that if there are node failures and parts of the cached RDDs are lost, they can be regenerated. However, checkpoint saves the RDD to an HDFS file and actually forgets the lineage completely. This is allows long lineages to be truncated and the data to be saved reliably in HDFS (which is naturally fault tolerant by replication). </p>
+]]></content>
+      <categories>
+        <category>spark</category>
+      </categories>
+      <tags>
+        <tag>spark</tag>
+        <tag>checkpoint</tag>
+        <tag>cache</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>flink 分流side output</title>
     <url>/2020/06/21/flink-%E5%88%86%E6%B5%81side-output/</url>
     <content><![CDATA[<h4 id="filter分流"><a href="#filter分流" class="headerlink" title="filter分流"></a>filter分流</h4><p>如果是使用 filter 来进行拆分，也能满足我们的需求，但每次筛选过滤都要保留整个流，然后通过遍历整个流来获取相应的数据，显然很浪费性能。</p>
@@ -67,41 +140,6 @@
       <tags>
         <tag>分流</tag>
         <tag>SideOputput</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>spark checkpoint cache区别</title>
-    <url>/2020/06/20/spark-checkpoint-cache%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<pre><code>cache会对rdd的血缘关系链条进行记忆，即使某个缓存的rdd由于节点问题丢失了，也会依据记忆的lineage重新产生。然而checkpoint会直接忘记rdd的lineages。</code></pre><p>​            There is a significant difference between cache and checkpoint. Cache materializes the RDD and keeps it in memory and/or disk. But the lineage of RDD (that is, seq of operations that generated the RDD) will be remembered, so that if there are node failures and parts of the cached RDDs are lost, they can be regenerated. However, checkpoint saves the RDD to an HDFS file and actually forgets the lineage completely. This is allows long lineages to be truncated and the data to be saved reliably in HDFS (which is naturally fault tolerant by replication). </p>
-]]></content>
-      <categories>
-        <category>spark</category>
-      </categories>
-      <tags>
-        <tag>spark</tag>
-        <tag>checkpoint</tag>
-        <tag>cache</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>flink 窗口分配器</title>
-    <url>/2020/06/22/flink-%E7%AA%97%E5%8F%A3%E5%88%86%E9%85%8D%E5%99%A8/</url>
-    <content><![CDATA[<p>WindowAssigner负责将传入的元素分配给一个或多个窗口。Flink基于一些常见的应用场景，为我们提供了几个预定义的WindowAssigner，分别是滚动窗口（tumbling windows）、滑动窗口（sliding windows）、会话窗口（session windows）以及全局窗口（global windows）。</p>
-<p>我们也可以通过继承WindowAssigner类来自定义窗口分配器逻辑。Flink内置的WindowAssigner中，除了global windows，其余几个都是基于时间（processing time or event time）来为窗口分配元素。</p>
-<h4 id="Tumbling-Windows"><a href="#Tumbling-Windows" class="headerlink" title="Tumbling Windows"></a>Tumbling Windows</h4><p>滚动窗口分配器会将每个元素分配给一个指定窗口大小的窗口。滚动窗口具有固定的窗口大小，并且窗口之间不会重叠。比如下图展示的是一个设定为5分钟窗口大小的滚动窗口，每五分钟会创建一个新的窗口。</p>
-<h4 id="Sliding-Windows"><a href="#Sliding-Windows" class="headerlink" title="Sliding Windows"></a>Sliding Windows</h4><p>滑动窗口分配器同样是将元素分配给固定大小的时间窗口，窗口大小的配置方式与滚动窗口一样，不同之处在于，滑动窗口还有一个额外的<code>slide</code>参数用于控制窗口滑动的频率。</p>
-<p>窗口之间的数据重叠大小根据 Windows size 和 Sliding time 决定，当 Slide size 小于 Windows size 便会发生窗口重叠，Slide size 大于 Windows size 就会出现窗口不连续，数据可能不能在任何一个窗口内计算，Slide size 和 Windows size 相等时，Sliding Windows 其实就是 Tumbing Windows。　</p>
-<h4 id="Session-Windows"><a href="#Session-Windows" class="headerlink" title="Session Windows"></a>Session Windows</h4><p>会话窗口通过活动会话来对元素进行分组。不同于滚动窗口和滑动窗口，会话窗口不会重叠，也没有固定的开始、结束时间。当一个会话窗口在指定的时间区间内没有接收到新的数据时，这个窗口将会被关闭。会话窗口分配器可以直接配置一个静态常量会话间隔，也可以通过函数来动态指定会话间隔时间。</p>
-<p> 会话窗口（Session Windows）主要是将某段时间内活跃的较高的数据聚合成一个窗口进行计算，窗口触发的条件是 Session Gap，是指在规定的时间内，如果没有数据活跃接入，则认为窗口结束，然后触发窗口计算结果。需要注意的是如果数据一直不间断进入窗口，也会导致窗口不触发的情况。与滑动窗口、滚动窗口不同的是，Session Windows 不需要由固定的 windows size 和 slide time，只需要定义 session gap，来规定不活跃数据的时间上限即可。</p>
-<p><strong>注意：</strong>由于会话窗口没有固定的开始结束时间，它的计算方法与滚动窗口、滑动窗口有所不同。在一个会话窗口算子内部会为每一个接收到的元素创建一个新的窗口，如果这些元素之间的时间间隔小于定义的会话窗口间隔，则将合并到一个窗口。为了能够进行窗口合并，我们需要为会话窗口定义一个<code>Tigger</code>函数和<code>Window Function</code>函数（例如ReduceFunction, AggregateFunction, or ProcessWindowFunction. FoldFunction不能用于合并）。</p>
-<h4 id="Global-Windows"><a href="#Global-Windows" class="headerlink" title="Global Windows"></a>Global Windows</h4><p>全局窗口分配器会将具有相同key值的所有元素分配在同一个窗口。这种窗口模式下需要我们设置一个自定义的<code>Trigger</code>，否则将不会执行任何计算，这是因为全局窗口中没有一个可以处理聚合元素的自然末端。</p>
-]]></content>
-      <categories>
-        <category>flink</category>
-      </categories>
-      <tags>
-        <tag>窗口</tag>
-        <tag>WindowAssigner</tag>
       </tags>
   </entry>
   <entry>
@@ -247,102 +285,6 @@
       </tags>
   </entry>
   <entry>
-    <title>山西介绍</title>
-    <url>/2020/06/19/%E5%B1%B1%E8%A5%BF%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[<p><strong>都说：</strong></p>
-<p><strong>十年中国看深圳，</strong></p>
-<p><strong>百年中国看上海，</strong></p>
-<p><strong>千年中国看北京，</strong></p>
-<p><strong>三千年中国看陕西，</strong></p>
-<p><strong>五千年中国看山西。</strong></p>
-<p><strong>深圳是中国改革开放的缩影，</strong></p>
-<p><strong>所以说“十年中国看深圳”；</strong></p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/60025415640345fdb55a27be40dc19c1.jpeg" alt="img"></p>
-<p><strong>150年前，</strong></p>
-<p><strong>上海只是江苏省松江县的华亭镇，</strong></p>
-<p><strong>现在已然发展成为东方第一大都市，</strong></p>
-<p><strong>上海是中国近代史的缩影，</strong></p>
-<p><strong>所以说“百年中国看上海”；</strong></p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/95892827e5f9489c980197df6265038b.jpeg" alt="img"></p>
-<p><strong>北京真正成为大中国的首都</strong></p>
-<p><strong>是从辽金时代开始的，</strong></p>
-<p><strong>距今约850年，</strong></p>
-<p><strong>所以说“千年中国看北京”。</strong></p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/711cb0e6651b4c6395c397b2383ee49c.jpeg" alt="img"></p>
-<p><strong>那么，五千年中国呢？</strong></p>
-<p>“五千年中国看山西”，这句话可能很多其他城市都不是很开心，首先，陕西就会第一个跳出来反对：我大西安十三朝古都，如何如何。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/ca916039eedb4c22ac912797598a94e1.jpeg" alt="img"></p>
-<p>其实大可不必着急，因为我们这里说看山西，只是因为山西历经五千年风雨，见证了中国五千年发展，仅此而已。</p>
-<p>细观历史课本可以知晓，中国的历史课本最爱用的词句就是，兵家必争之地。几乎哪里都可以被称为兵家必争之地，而这些历史，都是通过史官正传或者民间野传记载下来的，这也正是中国历史能够绵延千年而不断代的根本原因。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/3f485e0e98bb4bd2b7574b4c752cc60b.jpeg" alt="img"></p>
-<p>但也正因为如此，历史也就有了多种解释。很多历史游走于正史与野史之间，令读史的后人也不知所以。</p>
-<p>而山西是国内地上历史保存最为完整的省份之一，很多珍贵的历史文物都能够为历史自证名分。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/419648256041443bb2fa0e510e721e90.jpeg" alt="img"></p>
-<p>旧石器时代人类遗址西侯度遗址距今约有180万年，而丁村人遗址的发现更是将中国北方早期智人存在年代向前推到5到10万年。陶寺遗址被认为是帝尧都城所在，是最早的”中国”。位于侯马的春秋晋城遗址，则是山西作为春秋霸主时代晋国都城辉煌的证明。</p>
-<p><strong>1</strong></p>
-<p><strong>黄河文化</strong></p>
-<p>五千年中国历史看山西</p>
-<p><strong>山西是厚重的黄河文化的主要代表之一。</strong></p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/acbaf517992b43968a40885d73f12c10.jpeg" alt="img"></p>
-<p>古人类文化遗址、帝都古城、宝刹禅院、石窟碑碣、雕塑壁画、古塔古墓、佛道圣地、险堡雄关以及革命文物、史迹等，从北到南、珠串全省，构成了山西古今兼备，丰富多彩的人文景观。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/cf924e7c8f2c4f659a892485a95245e3.jpeg" alt="img"></p>
-<p>目前，全国保存完好的宋、金以前的地面古建筑物70%以上在山西省全省境内，具有珍贵价值的国家级重点保护文物就有119多处。</p>
-<p><strong>2</strong></p>
-<p><strong>边关要塞</strong></p>
-<p>五千年中国历史看山西</p>
-<p>中国历史上，山西仅在为数不多的时间作为某些朝代首都，但是回顾历朝历代，<strong>山西都作为边关要塞为历任君王所重视。</strong></p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/daa3e0a517054c278ebebee528107a78.jpeg" alt="img"></p>
-<p>历朝历代都有君王在山西境内修筑长城，在山西境内最有名的长城关城有平型关，雁门关，娘子关，偏关等，而全国唯一的宋代长城也在山西境内。</p>
-<p><strong>3</strong></p>
-<p><strong>晋商汇通天下</strong></p>
-<p>五千年中国历史看山西</p>
-<p>明清两代可谓是山西人最为活跃的时代，晋商在明清五百年间将中国古近代金融业做到了真正的”汇通天下”。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/7db770cefb9a49c3a195f2088b73e580.jpeg" alt="img"></p>
-<p><strong>简而言之，从古至今，山西都见证了中国历史的变迁与发展，而且一度在历史的舞台上发挥重要的作用，而留存下来的众多文物古迹也诉说着千年中国的漫漫历程。</strong></p>
-<p><strong>山西历史文化脉络清晰，框架完整；山西文明进程从未间断，影响深远。</strong></p>
-<p>山西历史从旧石器时代发端，历经尧舜禹和夏商周数千年的演进，到晋国和三晋时期已经形成有别于其他地域文化的显著特征。秦汉以来，山西历史文化更加多姿多彩，灿烂辉煌。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/af9238301c6e47aaa64d6522c883a5bf.jpeg" alt="img"></p>
-<p>山西历史文化的完整性、先进性和艺术性，对中华民族的形成发挥了重要作用，对华夏五千年文明产生了巨大影响，也使山西成为地方文化特色最浓厚的地区之一。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/90a5c42f10bc48b4b45cdc26d334fc15.jpeg" alt="img"></p>
-<p><strong>山西是华夏文明起源中心区域之一。</strong>史书中最早出现的“中国”一词，指的就是上古虞舜时代的山西南部。在中国本土发生的文明中从尧舜禹到夏商周，山西地区的文化传承从未间断。</p>
-<p><strong>自古以来，山西就是中原华夏族与北方各民族文化交汇的天然通道，是中原农耕经济与北方游牧经济冲撞对接的前沿阵地。</strong></p>
-<p>上古时期，中原各国的经济和军事实力不断增强，使得北方各民族逐渐融合于华夏族，接受了较为先进的华夏文化。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/68a6783173984e9f8482f051380f7705.jpeg" alt="img"></p>
-<p>到春秋后期，双方的界限几近消失。在明清时期的五个多世纪里，山西商人从盐业起步，发展到棉、布、粮、油、茶、药材、皮毛、金融等各个行业，并把商贸活动由故里扩展到全国各地，甚至远及今天的蒙古共和国、俄罗斯、朝鲜、日本等国。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/7f0a5de9e0e143cb8a29bf2d29cbbaaf.jpeg" alt="img"></p>
-<p>晋商的魄力之大、足迹之远、财富之巨，让世人认同了“无西不成商”的历史事实。</p>
-<p>山西地区的历史演进，联系贯通了上下五千年的华夏文明，留下的3.5万处文物古迹，国保单位119处，居全国第一。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/b781c856f98a4ae6b2a0daee4e0e560a.jpeg" alt="img"></p>
-<p><strong>因此山西最有资格成为世人了解和欣赏华夏文明的“主题公园”。</strong></p>
-<p><strong>山西历史文化具有不断变革和进步的鲜明特色，始终走在时代的前列。山西历史文化的发展证明，社会的变革和进步，既以先进思想为依据，又是新思想的摇篮。</strong></p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/47304b83889e40c4bc74cc65a5b8a4fd.jpeg" alt="img"></p>
-<p>春秋战国时期，山西成为战国法家、纵横家、名辩家和兵家的发源地，也是先秦早期儒家的重要支脉，由此形成蔚为大观的三晋儒学。</p>
-<p>这些进步思潮同处于百家争鸣的时代，不仅有相互的砥砺和激荡，也有相互的补充和促进，共同创造了具有进步特色的三晋文化。</p>
-<p>在距今两三万年前的朔州峙峪文化遗存中，发现了数百件表面刻有人工痕迹的骨片，说明峙峪人可能开始了原始的雕刻艺术。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/472ddc424d5f47de833216a533121ecb.jpeg" alt="img"></p>
-<p>从旧石器向新石器过渡时期的吉县柿子滩遗址上，有两处岩画被视为人类最早的艺术珍品。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/4e9ba6b837a7497b9941b43100bbdc54.jpeg" alt="img"></p>
-<p>距今四五千年的陶寺遗址中，出土了属于早期夏文化的鼓和磬，太原义井出土的一音孔和二音孔陶埙属于新石器时代的乐器。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/197290fb561a400da328010cf2354019.jpeg" alt="img"></p>
-<p>晋国大音乐家师旷以琴技和音律闻名，赵国人荀子则创立了艺术理论。</p>
-<p>离石的汉画像石，蒲津渡的唐朝黄河铁牛，元代晋南杂剧等等，都表明山西在人类文明演进中一直位居世界东方艺术苑林的前列。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/151093d2c88d4d8d8e7735bb7397859c.gif" alt="img"></p>
-<p>在众多的艺术门类中，山西古建筑及其依托古建而留存的壁画、雕塑和石窟艺术，古城和民居建筑艺术，成就更为突出，特色更加鲜明。</p>
-<p><strong><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/3a3aae788f254a179bdfa690f1d728da.jpeg" alt="img"></strong></p>
-<p><strong>如此种种，不得不说，</strong></p>
-<p><strong>晋善晋美，名副其实！</strong></p>
-<p><strong>作为山西人，</strong></p>
-<p><strong>我自豪！</strong></p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>山西</tag>
-        <tag>旅游</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>抱愧山西</title>
     <url>/2020/06/19/%E6%8A%B1%E6%84%A7%E5%B1%B1%E8%A5%BF/</url>
     <content><![CDATA[<p>一</p>
@@ -449,6 +391,102 @@
       <tags>
         <tag>山西</tag>
         <tag>晋商</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>山西介绍</title>
+    <url>/2020/06/19/%E5%B1%B1%E8%A5%BF%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<p><strong>都说：</strong></p>
+<p><strong>十年中国看深圳，</strong></p>
+<p><strong>百年中国看上海，</strong></p>
+<p><strong>千年中国看北京，</strong></p>
+<p><strong>三千年中国看陕西，</strong></p>
+<p><strong>五千年中国看山西。</strong></p>
+<p><strong>深圳是中国改革开放的缩影，</strong></p>
+<p><strong>所以说“十年中国看深圳”；</strong></p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/60025415640345fdb55a27be40dc19c1.jpeg" alt="img"></p>
+<p><strong>150年前，</strong></p>
+<p><strong>上海只是江苏省松江县的华亭镇，</strong></p>
+<p><strong>现在已然发展成为东方第一大都市，</strong></p>
+<p><strong>上海是中国近代史的缩影，</strong></p>
+<p><strong>所以说“百年中国看上海”；</strong></p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/95892827e5f9489c980197df6265038b.jpeg" alt="img"></p>
+<p><strong>北京真正成为大中国的首都</strong></p>
+<p><strong>是从辽金时代开始的，</strong></p>
+<p><strong>距今约850年，</strong></p>
+<p><strong>所以说“千年中国看北京”。</strong></p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/711cb0e6651b4c6395c397b2383ee49c.jpeg" alt="img"></p>
+<p><strong>那么，五千年中国呢？</strong></p>
+<p>“五千年中国看山西”，这句话可能很多其他城市都不是很开心，首先，陕西就会第一个跳出来反对：我大西安十三朝古都，如何如何。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/ca916039eedb4c22ac912797598a94e1.jpeg" alt="img"></p>
+<p>其实大可不必着急，因为我们这里说看山西，只是因为山西历经五千年风雨，见证了中国五千年发展，仅此而已。</p>
+<p>细观历史课本可以知晓，中国的历史课本最爱用的词句就是，兵家必争之地。几乎哪里都可以被称为兵家必争之地，而这些历史，都是通过史官正传或者民间野传记载下来的，这也正是中国历史能够绵延千年而不断代的根本原因。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/3f485e0e98bb4bd2b7574b4c752cc60b.jpeg" alt="img"></p>
+<p>但也正因为如此，历史也就有了多种解释。很多历史游走于正史与野史之间，令读史的后人也不知所以。</p>
+<p>而山西是国内地上历史保存最为完整的省份之一，很多珍贵的历史文物都能够为历史自证名分。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/419648256041443bb2fa0e510e721e90.jpeg" alt="img"></p>
+<p>旧石器时代人类遗址西侯度遗址距今约有180万年，而丁村人遗址的发现更是将中国北方早期智人存在年代向前推到5到10万年。陶寺遗址被认为是帝尧都城所在，是最早的”中国”。位于侯马的春秋晋城遗址，则是山西作为春秋霸主时代晋国都城辉煌的证明。</p>
+<p><strong>1</strong></p>
+<p><strong>黄河文化</strong></p>
+<p>五千年中国历史看山西</p>
+<p><strong>山西是厚重的黄河文化的主要代表之一。</strong></p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/acbaf517992b43968a40885d73f12c10.jpeg" alt="img"></p>
+<p>古人类文化遗址、帝都古城、宝刹禅院、石窟碑碣、雕塑壁画、古塔古墓、佛道圣地、险堡雄关以及革命文物、史迹等，从北到南、珠串全省，构成了山西古今兼备，丰富多彩的人文景观。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/cf924e7c8f2c4f659a892485a95245e3.jpeg" alt="img"></p>
+<p>目前，全国保存完好的宋、金以前的地面古建筑物70%以上在山西省全省境内，具有珍贵价值的国家级重点保护文物就有119多处。</p>
+<p><strong>2</strong></p>
+<p><strong>边关要塞</strong></p>
+<p>五千年中国历史看山西</p>
+<p>中国历史上，山西仅在为数不多的时间作为某些朝代首都，但是回顾历朝历代，<strong>山西都作为边关要塞为历任君王所重视。</strong></p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/daa3e0a517054c278ebebee528107a78.jpeg" alt="img"></p>
+<p>历朝历代都有君王在山西境内修筑长城，在山西境内最有名的长城关城有平型关，雁门关，娘子关，偏关等，而全国唯一的宋代长城也在山西境内。</p>
+<p><strong>3</strong></p>
+<p><strong>晋商汇通天下</strong></p>
+<p>五千年中国历史看山西</p>
+<p>明清两代可谓是山西人最为活跃的时代，晋商在明清五百年间将中国古近代金融业做到了真正的”汇通天下”。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/7db770cefb9a49c3a195f2088b73e580.jpeg" alt="img"></p>
+<p><strong>简而言之，从古至今，山西都见证了中国历史的变迁与发展，而且一度在历史的舞台上发挥重要的作用，而留存下来的众多文物古迹也诉说着千年中国的漫漫历程。</strong></p>
+<p><strong>山西历史文化脉络清晰，框架完整；山西文明进程从未间断，影响深远。</strong></p>
+<p>山西历史从旧石器时代发端，历经尧舜禹和夏商周数千年的演进，到晋国和三晋时期已经形成有别于其他地域文化的显著特征。秦汉以来，山西历史文化更加多姿多彩，灿烂辉煌。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/af9238301c6e47aaa64d6522c883a5bf.jpeg" alt="img"></p>
+<p>山西历史文化的完整性、先进性和艺术性，对中华民族的形成发挥了重要作用，对华夏五千年文明产生了巨大影响，也使山西成为地方文化特色最浓厚的地区之一。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/90a5c42f10bc48b4b45cdc26d334fc15.jpeg" alt="img"></p>
+<p><strong>山西是华夏文明起源中心区域之一。</strong>史书中最早出现的“中国”一词，指的就是上古虞舜时代的山西南部。在中国本土发生的文明中从尧舜禹到夏商周，山西地区的文化传承从未间断。</p>
+<p><strong>自古以来，山西就是中原华夏族与北方各民族文化交汇的天然通道，是中原农耕经济与北方游牧经济冲撞对接的前沿阵地。</strong></p>
+<p>上古时期，中原各国的经济和军事实力不断增强，使得北方各民族逐渐融合于华夏族，接受了较为先进的华夏文化。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/68a6783173984e9f8482f051380f7705.jpeg" alt="img"></p>
+<p>到春秋后期，双方的界限几近消失。在明清时期的五个多世纪里，山西商人从盐业起步，发展到棉、布、粮、油、茶、药材、皮毛、金融等各个行业，并把商贸活动由故里扩展到全国各地，甚至远及今天的蒙古共和国、俄罗斯、朝鲜、日本等国。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/7f0a5de9e0e143cb8a29bf2d29cbbaaf.jpeg" alt="img"></p>
+<p>晋商的魄力之大、足迹之远、财富之巨，让世人认同了“无西不成商”的历史事实。</p>
+<p>山西地区的历史演进，联系贯通了上下五千年的华夏文明，留下的3.5万处文物古迹，国保单位119处，居全国第一。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/b781c856f98a4ae6b2a0daee4e0e560a.jpeg" alt="img"></p>
+<p><strong>因此山西最有资格成为世人了解和欣赏华夏文明的“主题公园”。</strong></p>
+<p><strong>山西历史文化具有不断变革和进步的鲜明特色，始终走在时代的前列。山西历史文化的发展证明，社会的变革和进步，既以先进思想为依据，又是新思想的摇篮。</strong></p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/47304b83889e40c4bc74cc65a5b8a4fd.jpeg" alt="img"></p>
+<p>春秋战国时期，山西成为战国法家、纵横家、名辩家和兵家的发源地，也是先秦早期儒家的重要支脉，由此形成蔚为大观的三晋儒学。</p>
+<p>这些进步思潮同处于百家争鸣的时代，不仅有相互的砥砺和激荡，也有相互的补充和促进，共同创造了具有进步特色的三晋文化。</p>
+<p>在距今两三万年前的朔州峙峪文化遗存中，发现了数百件表面刻有人工痕迹的骨片，说明峙峪人可能开始了原始的雕刻艺术。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/472ddc424d5f47de833216a533121ecb.jpeg" alt="img"></p>
+<p>从旧石器向新石器过渡时期的吉县柿子滩遗址上，有两处岩画被视为人类最早的艺术珍品。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/4e9ba6b837a7497b9941b43100bbdc54.jpeg" alt="img"></p>
+<p>距今四五千年的陶寺遗址中，出土了属于早期夏文化的鼓和磬，太原义井出土的一音孔和二音孔陶埙属于新石器时代的乐器。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/197290fb561a400da328010cf2354019.jpeg" alt="img"></p>
+<p>晋国大音乐家师旷以琴技和音律闻名，赵国人荀子则创立了艺术理论。</p>
+<p>离石的汉画像石，蒲津渡的唐朝黄河铁牛，元代晋南杂剧等等，都表明山西在人类文明演进中一直位居世界东方艺术苑林的前列。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/151093d2c88d4d8d8e7735bb7397859c.gif" alt="img"></p>
+<p>在众多的艺术门类中，山西古建筑及其依托古建而留存的壁画、雕塑和石窟艺术，古城和民居建筑艺术，成就更为突出，特色更加鲜明。</p>
+<p><strong><img src="http://5b0988e595225.cdn.sohucs.com/images/20180428/3a3aae788f254a179bdfa690f1d728da.jpeg" alt="img"></strong></p>
+<p><strong>如此种种，不得不说，</strong></p>
+<p><strong>晋善晋美，名副其实！</strong></p>
+<p><strong>作为山西人，</strong></p>
+<p><strong>我自豪！</strong></p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>山西</tag>
+        <tag>旅游</tag>
       </tags>
   </entry>
 </search>

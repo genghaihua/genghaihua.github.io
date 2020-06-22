@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="窗口,Triggers," />
 
 
 
@@ -81,13 +81,17 @@
 
 
 
-<meta name="description" content="独孤九剑">
-<meta property="og:type" content="website">
-<meta property="og:title" content="华仔的blog">
-<meta property="og:url" content="http://yoursite.com/categories/spark/index.html">
+<meta name="description" content="Trigger用于决定窗口什么时候被window function处理。Flink中每个WindowAssigner都有一个默认的Trigger。我们也可以通过trigger(...)函数来自定义触发规则。 12* A &amp;#123;@code Trigger&amp;#125; determines when a pane of a window should be evaluated to emit t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flink Triggers">
+<meta property="og:url" content="http://yoursite.com/2020/06/22/flink-Triggers/index.html">
 <meta property="og:site_name" content="华仔的blog">
-<meta property="og:description" content="独孤九剑">
+<meta property="og:description" content="Trigger用于决定窗口什么时候被window function处理。Flink中每个WindowAssigner都有一个默认的Trigger。我们也可以通过trigger(...)函数来自定义触发规则。 12* A &amp;#123;@code Trigger&amp;#125; determines when a pane of a window should be evaluated to emit t">
+<meta property="article:published_time" content="2020-06-22T08:04:27.000Z">
+<meta property="article:modified_time" content="2020-06-22T08:16:56.152Z">
 <meta property="article:author" content="风清扬">
+<meta property="article:tag" content="窗口">
+<meta property="article:tag" content="Triggers">
 <meta name="twitter:card" content="summary">
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/spark/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/06/22/flink-Triggers/"/>
 
 
 
 
 
-  <title>分类: spark | 华仔的blog</title>
+  <title>flink Triggers | 华仔的blog</title>
   
 
 
@@ -143,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -281,83 +285,212 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>spark<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/22/flink-Triggers/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="风清扬">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/huazai.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="华仔的blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2020/06/20/spark-checkpoint-cache%E5%8C%BA%E5%88%AB/" itemprop="url">
-              
-                <span itemprop="name">spark checkpoint cache区别</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">flink Triggers</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-06-20T23:40:53+08:00"
-              content="2020-06-20" >
-          06-20
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-22T16:04:27+08:00">
+                2020-06-22
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index">
+                    <span itemprop="name">flink</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>Trigger用于决定窗口什么时候被window function处理。Flink中每个WindowAssigner都有一个默认的Trigger。我们也可以通过<code>trigger(...)</code>函数来自定义触发规则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* A &#123;@code Trigger&#125; determines when a pane of a window should be evaluated to emit the</span><br><span class="line">* results for that part of the window.</span><br></pre></td></tr></table></figure>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/06/20/spark-rdd-%E5%BC%B9%E6%80%A7/" itemprop="url">
-              
-                <span itemprop="name">spark rdd 弹性</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-06-20T23:08:36+08:00"
-              content="2020-06-20" >
-          06-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+<p>未完待续</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="风清扬 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="风清扬 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%AA%97%E5%8F%A3/" rel="tag"># 窗口</a>
+          
+            <a href="/tags/Triggers/" rel="tag"># Triggers</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/22/flink-Window-Function/" rel="next" title="flink Window Function">
+                <i class="fa fa-chevron-left"></i> flink Window Function
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/22/flink-Evictors/" rel="prev" title="flink Evictors">
+                flink Evictors <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -365,6 +498,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -649,6 +786,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
